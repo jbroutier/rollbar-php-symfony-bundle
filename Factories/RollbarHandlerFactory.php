@@ -37,14 +37,16 @@ class RollbarHandlerFactory
                         $token = $container->get('security.token_storage')->getToken();
 
                         if ($token) {
-                            $user = $token->getUser();
+                            $user       = $token->getUser();
                             $serializer = $container->get('serializer');
-                            $person = \json_decode($serializer->serialize($user, 'json'), true);
-                            return $person;
+
+                            return json_decode($serializer->serialize($user, 'json'), true);
                         }
                     } catch (\Exception $exception) {
-                        // Ignore
+                        return null;
                     }
+
+                    return null;
                 };
             }
         }
