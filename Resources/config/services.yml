@@ -5,7 +5,7 @@ services:
       - '@service_container'
 
   Rollbar\Monolog\Handler\RollbarHandler:
-    factory: 'Rollbar\Symfony\RollbarBundle\Factories\RollbarHandlerFactory:createRollbarHandler'
+    factory: ['@Rollbar\Symfony\RollbarBundle\Factories\RollbarHandlerFactory', 'createRollbarHandler']
     tags:
       - { name: monolog.logger, channel: rollbar }
 
